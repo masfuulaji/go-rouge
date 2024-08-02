@@ -15,12 +15,22 @@ type MapTile struct {
 	Blocked bool
 }
 
-func GetIndexFromXY(x, y int) int {
+type Level struct {
+	Tiles []MapTile
+}
+
+func NewLevel() *Level {
+	l := &Level{}
+	l.Tiles = l.CreateTiles()
+	return l
+}
+
+func (l *Level) GetIndexFromXY(x, y int) int {
 	g := config.NewGameData()
 	return y*g.ScreenWidth + x
 }
 
-func CreateTiles() []MapTile {
+func (l *Level) CreateTiles() []MapTile {
 	g := config.NewGameData()
 	tiles := make([]MapTile, 0)
 	for x := 0; x < g.ScreenWidth; x++ {
